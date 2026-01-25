@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NFL's Most Loved Players</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+:root {
+  --bg-dark: #05060c;
+  --card-radius: 16px;
+  --text-main: #e9f4f1;
+  --text-muted: #a8c1bd;
+  --accent: #42f5c5;
+  --gold: #ffcc33;
+
+  --panel: rgba(255,255,255,0.04);
+  --panel-border: rgba(255,255,255,0.08);
+  --shadow: 0 26px 70px rgba(0,0,0,0.55);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 70% -200px, rgba(16,63,58,0.90) 0%, transparent 60%),
+    radial-gradient(900px 520px at 10% 0%, rgba(11,26,58,0.90) 0%, transparent 55%),
+    radial-gradient(900px 560px at 85% 30%, rgba(66,245,197,0.12) 0%, transparent 55%),
+    var(--bg-dark);
+  color: var(--text-main);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* subtle stars + grain */
+body:before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,0.60) 50%, transparent 52%),
+    radial-gradient(2px 2px at 68% 12%, rgba(255,255,255,0.42) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 44% 26%, rgba(255,255,255,0.42) 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 84% 36%, rgba(255,255,255,0.34) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 18% 42%, rgba(255,255,255,0.34) 50%, transparent 52%),
+    radial-gradient(2px 2px at 30% 70%, rgba(255,255,255,0.28) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 76% 74%, rgba(255,255,255,0.28) 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 55% 88%, rgba(255,255,255,0.30) 50%, transparent 52%);
+  opacity:0.28;
+  mix-blend-mode:screen;
+}
+body:after{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  opacity:.16;
+  mix-blend-mode:overlay;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 42px auto 60px;
+  padding: 0 22px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 44px;
+  letter-spacing: 1px;
+  margin: 0 0 22px;
+  font-weight: 900;
+}
+h1 span { color: var(--accent); }
+
+.grid {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  padding: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.grid:before{
+  content:"";
+  position:absolute; inset:-40px;
+  background:
+    radial-gradient(520px 260px at 22% 18%, rgba(66,245,197,0.16), transparent 62%),
+    radial-gradient(520px 280px at 78% 85%, rgba(255,255,255,0.06), transparent 64%),
+    radial-gradient(520px 260px at 70% 15%, rgba(11,26,58,0.22), transparent 62%);
+  filter: blur(14px);
+  opacity:0.85;
+  pointer-events:none;
+}
+.grid-inner{ position:relative; z-index:1; }
+
+/* ROWS — gradient storytelling */
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.30);
+}
+
+/* FINAL: row 1 a touch brighter, “most loved” */
+.row-1{
+  background: linear-gradient(90deg, #1CFFC3 0%, #18D9B1 45%, #13B89A 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.18) inset,
+    0 12px 30px rgba(28,255,195,0.10);
+}
+.row-2 { background: linear-gradient(90deg, #1bb4ff, #165c9e); }
+.row-3 { background: linear-gradient(90deg, #174f8a, #0f355f); }
+.row-4 { background: linear-gradient(90deg, #0f2b45, #091c30); }
+.row-5 { background: linear-gradient(90deg, #0b1320, #05080f); }
+
+@media (max-width: 900px){
+  .row{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 560px){
+  h1{ font-size: 34px; }
+  .row{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* PLAYER CARD */
+.card {
+  background: rgba(0,0,0,0.35);
+  border-radius: var(--card-radius);
+  padding: 14px 12px 16px;
+  text-align: center;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.card:before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(220px 140px at 30% 20%, rgba(255,255,255,0.12), transparent 60%),
+    radial-gradient(280px 220px at 70% 95%, rgba(0,0,0,0.55), transparent 60%);
+  opacity:0.85;
+  pointer-events:none;
+}
+.row-1 .card{
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.09),
+    0 10px 22px rgba(0,0,0,0.25);
+}
+
+.card.rank-1 {
+  box-shadow:
+    0 0 0 2px rgba(255,204,51,0.85),
+    0 0 28px rgba(255,204,51,0.24),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+/* RANK BADGE */
+.rank {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  background: rgba(0,0,0,0.55);
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* HEADSHOT (with reduced glow) */
+.avatar {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+
+  /* FINAL TWEAK: reduce “beauty-filter” glow, keep depth */
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.12),
+    0 10px 18px rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.25);
+}
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  transform: scale(1.03);
+}
+
+/* softer outer glow */
+.avatar::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:50%;
+  background: radial-gradient(circle at 50% 45%,
+    rgba(66,245,197,0.22) 0%,
+    rgba(66,245,197,0.10) 38%,
+    transparent 70%);
+  filter: blur(6px);
+  opacity: 0.75;
+  pointer-events:none;
+}
+
+/* slightly darker inner vignette */
+.avatar::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle at 50% 35%,
+    rgba(255,255,255,0.06) 0%,
+    rgba(0,0,0,0.22) 68%,
+    rgba(0,0,0,0.38) 100%);
+  pointer-events:none;
+}
+
+/* TEXT */
+.name {
+  position: relative;
+  z-index: 2;
+  font-size: 14px;
+  font-weight: 800;
+  margin: 0 0 4px;
+  line-height: 1.15;
+}
+.team {
+  position: relative;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: rgba(233,244,241,0.72);
+  margin: 0;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.scale {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(233,244,241,0.85);
+}
+.scale span:first-child{ color: rgba(66,245,197,0.95); }
+.scale span:last-child{ color: rgba(233,244,241,0.78); }
+
+.bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #1cffc3, #1bb4ff, #0f355f, #05080f);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.scale-sub{
+  margin-top:6px;
+  font-size:11px;
+  color:rgba(233,244,241,0.70);
+  letter-spacing:0.02em;
+}
+
+.meta {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(233,244,241,0.78);
+  margin-top: 10px;
+  max-width: 980px;
+}
+.meta b{ color: rgba(233,244,241,0.92); }
+
+.brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.source {
+  font-size: 12px;
+  color: rgba(233,244,241,0.72);
+}
+.source a{
+  color: rgba(66,245,197,0.95);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(66,245,197,0.55);
+  font-weight: 900;
+}
+
+.brand img{
+  height: 60px;
+  width: auto;
+  filter: drop-shadow(0 14px 26px rgba(0,0,0,0.55));
+  opacity: 0.96;
+}
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>NFL’S MOST LOVED <span>PLAYERS</span></h1>
+
+    <div class="grid">
+      <div class="grid-inner" id="grid"></div>
+
+      <div class="footer">
+        <div class="scale" aria-label="Love scale">
+          <span>MORE LOVE</span>
+          <div class="bar" aria-hidden="true"></div>
+          <span>LESS LOVE</span>
+        </div>
+        <div class="scale-sub">Based on positive fan sentiment</div>
+
+        <div class="meta">
+          <b>How this ranking was built:</b> We analyzed Reddit comments mentioning each player by full name, classified sentiment
+          (<b>positive / neutral / negative</b>) using VADER, then ranked players by <b>how consistently they’re praised</b> — with a boost for discussion volume.
+        </div>
+
+        <div class="brand">
+          <div class="source">
+            Source: <a href="https://www.vegasinsider.com/" target="_blank" rel="noopener">vegasinsider.com</a>
+            &nbsp;·&nbsp; Data: Reddit comments &nbsp;·&nbsp; Headshots: ESPN CDN
+          </div>
+
+          <!-- Original Vegas Insider logo (keep this) -->
+          <img src="https://i.postimg.cc/Dfckk5rD/download.png" alt="Vegas Insider" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/**
+ * Headshots: ESPN CDN
+ * https://a.espncdn.com/i/headshots/nfl/players/full/{athleteId}.png
+ */
+
+const PLAYERS = [
+  { rank:1,  team:"GB PACKERS",     name:"Jordan Love",      espnId:4036378 },
+  { rank:2,  team:"MINNESOTA",      name:"JJ McCarthy",      espnId:4433970 },
+  { rank:3,  team:"BUFFALO",        name:"Josh Allen",       espnId:3918298 },
+  { rank:4,  team:"MIAMI",          name:"Kenneth Grant",    espnId:4894654 },
+  { rank:5,  team:"TENNESSEE",      name:"Cam Ward",         espnId:4688380 },
+
+  { rank:6,  team:"DENVER",         name:"Bo Nix",           espnId:4426338 },
+  { rank:7,  team:"PHILADELPHIA",   name:"Ty Robinson",      espnId:4569586 },
+  { rank:8,  team:"COMMANDERS",     name:"Jayden Daniels",   espnId:4426348 },
+  { rank:9,  team:"INDIANAPOLIS",   name:"Daniel Jones",     espnId:3917792 },
+  { rank:10, team:"NY GIANTS",      name:"Russell Wilson",   espnId:14881 },
+
+  { rank:11, team:"NY JETS",        name:"Justin Fields",    espnId:4362887 },
+  { rank:12, team:"PITTSBURGH",     name:"Aaron Rodgers",    espnId:8439 },
+  { rank:13, team:"SEATTLE",        name:"Sam Darnold",      espnId:3912547 },
+  { rank:14, team:"TB BUCS",        name:"Baker Mayfield",   espnId:3052587 },
+  { rank:15, team:"JACKSONVILLE",   name:"Trevor Lawrence",  espnId:4361579 },
+
+  { rank:16, team:"JACKSONVILLE",   name:"Travis Hunter",    espnId:4685415 },
+  { rank:17, team:"MINNESOTA",      name:"Justin Jefferson", espnId:4262921 },
+  { rank:18, team:"CHICAGO",        name:"Caleb Williams",   espnId:4431611 },
+  { rank:19, team:"CAROLINA",       name:"Bryce Young",      espnId:4685720 },
+  { rank:20, team:"PITTSBURGH",     name:"Will Howard",      espnId:4429955 },
+
+  { rank:21, team:"BALTIMORE",      name:"Derrick Henry",    espnId:3043078 },
+  { rank:22, team:"HOUSTON",        name:"CJ Stroud",        espnId:4432577 },
+  { rank:23, team:"BALTIMORE",      name:"Lamar Jackson",    espnId:3916387 },
+  { rank:24, team:"CINCINNATI",     name:"Joe Burrow",       espnId:3915511 },
+  { rank:25, team:"KC CHIEFS",      name:"Patrick Mahomes",  espnId:3139477 }
+];
+
+const FALLBACK =
+  `data:image/svg+xml;utf8,` +
+  encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+      <defs>
+        <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="rgba(255,255,255,0.22)" offset="0"/>
+          <stop stop-color="rgba(255,255,255,0.06)" offset="1"/>
+        </linearGradient>
+      </defs>
+      <rect width="200" height="200" fill="rgba(0,0,0,0.22)"/>
+      <circle cx="100" cy="84" r="34" fill="url(#g)"/>
+      <path d="M30,190c8-42,36-64,70-64s62,22,70,64" fill="url(#g)"/>
+    </svg>
+`);
+
+function headshotUrl(id){
+  return `https://a.espncdn.com/i/headshots/nfl/players/full/${id}.png`;
+}
+function headshotAltUrl(id){
+  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${id}.png&w=240&h=240`;
+}
+
+function rowClassForRank(rank){
+  if(rank <= 5) return "row-1";
+  if(rank <= 10) return "row-2";
+  if(rank <= 15) return "row-3";
+  if(rank <= 20) return "row-4";
+  return "row-5";
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  // Build 5 rows of 5 players
+  for(let r = 0; r < 5; r++){
+    const row = document.createElement("div");
+    row.className = `row ${rowClassForRank(r*5 + 1)}`;
+
+    const slice = PLAYERS.slice(r*5, r*5 + 5);
+    for(const p of slice){
+      const card = document.createElement("div");
+      card.className = `card ${p.rank === 1 ? "rank-1" : ""}`;
+
+      const badge = document.createElement("div");
+      badge.className = "rank";
+      badge.textContent = `#${p.rank}`;
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+
+      const img = document.createElement("img");
+      img.alt = `${p.name} headshot`;
+      img.src = headshotUrl(p.espnId);
+      img.onerror = () => {
+        if (img.src !== headshotAltUrl(p.espnId)) img.src = headshotAltUrl(p.espnId);
+        else img.src = FALLBACK;
+      };
+      avatar.appendChild(img);
+
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = p.name;
+
+      const team = document.createElement("div");
+      team.className = "team";
+      team.textContent = p.team;
+
+      card.appendChild(badge);
+      card.appendChild(avatar);
+      card.appendChild(name);
+      card.appendChild(team);
+
+      row.appendChild(card);
+    }
+
+    grid.appendChild(row);
+  }
+}
+
+render();
+</script>
+</body>
+</html>
