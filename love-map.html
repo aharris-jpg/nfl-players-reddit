@@ -107,7 +107,7 @@ h1 span { color: var(--accent); }
   box-shadow: 0 10px 26px rgba(0,0,0,0.30);
 }
 
-/* FINAL: row 1 a touch brighter, “most loved” */
+/* row 1 = brightest “most loved” */
 .row-1{
   background: linear-gradient(90deg, #1CFFC3 0%, #18D9B1 45%, #13B89A 100%);
   box-shadow:
@@ -173,7 +173,7 @@ h1 span { color: var(--accent); }
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-/* HEADSHOT (with reduced glow) */
+/* HEADSHOT */
 .avatar {
   width: 92px;
   height: 92px;
@@ -182,8 +182,6 @@ h1 span { color: var(--accent); }
   position: relative;
   overflow: hidden;
   z-index: 2;
-
-  /* FINAL TWEAK: reduce “beauty-filter” glow, keep depth */
   box-shadow:
     0 0 0 3px rgba(255,255,255,0.12),
     0 10px 18px rgba(0,0,0,0.35);
@@ -196,8 +194,6 @@ h1 span { color: var(--accent); }
   display:block;
   transform: scale(1.03);
 }
-
-/* softer outer glow */
 .avatar::before{
   content:"";
   position:absolute;
@@ -211,8 +207,6 @@ h1 span { color: var(--accent); }
   opacity: 0.75;
   pointer-events:none;
 }
-
-/* slightly darker inner vignette */
 .avatar::after{
   content:"";
   position:absolute;
@@ -356,35 +350,35 @@ h1 span { color: var(--accent); }
  */
 
 const PLAYERS = [
-  { rank:1,  team:"GB PACKERS",     name:"Jordan Love",      espnId:4036378 },
-  { rank:2,  team:"MINNESOTA",      name:"JJ McCarthy",      espnId:4433970 },
-  { rank:3,  team:"BUFFALO",        name:"Josh Allen",       espnId:3918298 },
-  { rank:4,  team:"MIAMI",          name:"Kenneth Grant",    espnId:4894654 },
-  { rank:5,  team:"TENNESSEE",      name:"Cam Ward",         espnId:4688380 },
+  { rank:1,  team:"MINNESOTA",      name:"JJ McCarthy",      espnId:4433970 },
+  { rank:2,  team:"BUFFALO",        name:"Josh Allen",       espnId:3918298 },
+  { rank:3,  team:"MIAMI",          name:"Kenneth Grant",    espnId:4894654 },
+  { rank:4,  team:"TENNESSEE",      name:"Cam Ward",         espnId:4688380 },
+  { rank:5,  team:"DENVER",         name:"Bo Nix",           espnId:4426338 },
 
-  { rank:6,  team:"DENVER",         name:"Bo Nix",           espnId:4426338 },
-  { rank:7,  team:"PHILADELPHIA",   name:"Ty Robinson",      espnId:4569586 },
-  { rank:8,  team:"COMMANDERS",     name:"Jayden Daniels",   espnId:4426348 },
-  { rank:9,  team:"INDIANAPOLIS",   name:"Daniel Jones",     espnId:3917792 },
-  { rank:10, team:"NY GIANTS",      name:"Russell Wilson",   espnId:14881 },
+  { rank:6,  team:"PHILADELPHIA",   name:"Ty Robinson",      espnId:4569586 },
+  { rank:7,  team:"COMMANDERS",     name:"Jayden Daniels",   espnId:4426348 },
+  { rank:8,  team:"INDIANAPOLIS",   name:"Daniel Jones",     espnId:3917792 },
+  { rank:9,  team:"NY GIANTS",      name:"Russell Wilson",   espnId:14881 },
+  { rank:10, team:"NY JETS",        name:"Justin Fields",    espnId:4362887 },
 
-  { rank:11, team:"NY JETS",        name:"Justin Fields",    espnId:4362887 },
-  { rank:12, team:"PITTSBURGH",     name:"Aaron Rodgers",    espnId:8439 },
-  { rank:13, team:"SEATTLE",        name:"Sam Darnold",      espnId:3912547 },
-  { rank:14, team:"TB BUCS",        name:"Baker Mayfield",   espnId:3052587 },
-  { rank:15, team:"JACKSONVILLE",   name:"Trevor Lawrence",  espnId:4361579 },
+  { rank:11, team:"PITTSBURGH",     name:"Aaron Rodgers",    espnId:8439 },
+  { rank:12, team:"SEATTLE",        name:"Sam Darnold",      espnId:3912547 },
+  { rank:13, team:"TB BUCS",        name:"Baker Mayfield",   espnId:3052587 },
+  { rank:14, team:"JACKSONVILLE",   name:"Trevor Lawrence",  espnId:4361579 },
+  { rank:15, team:"JACKSONVILLE",   name:"Travis Hunter",    espnId:4685415 },
 
-  { rank:16, team:"JACKSONVILLE",   name:"Travis Hunter",    espnId:4685415 },
-  { rank:17, team:"MINNESOTA",      name:"Justin Jefferson", espnId:4262921 },
-  { rank:18, team:"CHICAGO",        name:"Caleb Williams",   espnId:4431611 },
-  { rank:19, team:"CAROLINA",       name:"Bryce Young",      espnId:4685720 },
-  { rank:20, team:"PITTSBURGH",     name:"Will Howard",      espnId:4429955 },
+  { rank:16, team:"MINNESOTA",      name:"Justin Jefferson", espnId:4262921 },
+  { rank:17, team:"CHICAGO",        name:"Caleb Williams",   espnId:4431611 },
+  { rank:18, team:"CAROLINA",       name:"Bryce Young",      espnId:4685720 },
+  { rank:19, team:"PITTSBURGH",     name:"Will Howard",      espnId:4429955 },
+  { rank:20, team:"BALTIMORE",      name:"Derrick Henry",    espnId:3043078 },
 
-  { rank:21, team:"BALTIMORE",      name:"Derrick Henry",    espnId:3043078 },
-  { rank:22, team:"HOUSTON",        name:"CJ Stroud",        espnId:4432577 },
-  { rank:23, team:"BALTIMORE",      name:"Lamar Jackson",    espnId:3916387 },
-  { rank:24, team:"CINCINNATI",     name:"Joe Burrow",       espnId:3915511 },
-  { rank:25, team:"KC CHIEFS",      name:"Patrick Mahomes",  espnId:3139477 }
+  { rank:21, team:"HOUSTON",        name:"CJ Stroud",        espnId:4432577 },
+  { rank:22, team:"BALTIMORE",      name:"Lamar Jackson",    espnId:3916387 },
+  { rank:23, team:"CINCINNATI",     name:"Joe Burrow",       espnId:3915511 },
+  { rank:24, team:"KC CHIEFS",      name:"Patrick Mahomes",  espnId:3139477 },
+  { rank:25, team:"BUFFALO",        name:"Ty Johnson",       espnId:3915411 } // ✅ fixed
 ];
 
 const FALLBACK =
@@ -422,7 +416,6 @@ function render(){
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
 
-  // Build 5 rows of 5 players
   for(let r = 0; r < 5; r++){
     const row = document.createElement("div");
     row.className = `row ${rowClassForRank(r*5 + 1)}`;
