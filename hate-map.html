@@ -403,6 +403,29 @@ function headshotAltUrl(id){
   return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${id}.png&w=240&h=240`;
 }
 
+/* ✅ CHANGE: show CITY/MARKET (matches Love map) */
+function marketFromTeam(team){
+  const t = String(team || "").toUpperCase().replace(/\s+/g," ").trim();
+  const MAP = {
+    "PHILADELPHIA EAGLES":"PHILADELPHIA",
+    "WASHINGTON COMMANDERS":"WASHINGTON",
+    "CHICAGO BEARS":"CHICAGO",
+    "MIAMI DOLPHINS":"MIAMI",
+    "INDIANAPOLIS COLTS":"INDIANAPOLIS",
+    "CLEVELAND BROWNS":"CLEVELAND",
+    "NEW YORK JETS":"NY JETS",
+    "PITTSBURGH STEELERS":"PITTSBURGH",
+    "TENNESSEE TITANS":"TENNESSEE",
+    "CINCINNATI BENGALS":"CINCINNATI",
+    "BALTIMORE RAVENS":"BALTIMORE",
+    "BUFFALO BILLS":"BUFFALO",
+    "LOS ANGELES CHARGERS":"LA CHARGERS",
+    "DETROIT LIONS":"DETROIT",
+    "KANSAS CITY CHIEFS":"KC CHIEFS"
+  };
+  return MAP[t] || t;
+}
+
 function rowClassForRank(rank){
   if(rank <= 5) return "row-1";
   if(rank <= 10) return "row-2";
@@ -447,7 +470,7 @@ function render(){
 
       const team = document.createElement("div");
       team.className = "team";
-      team.textContent = p.team;
+      team.textContent = marketFromTeam(p.team);
 
       card.appendChild(badge);
       card.appendChild(avatar);
