@@ -6,29 +6,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <style>
-:root {
-  --bg-dark: #05060c;
-  --card-radius: 16px;
-  --text-main: #f4eeed;
-  --text-muted: rgba(244,238,237,0.72);
-  --accent: #ff3b3b;         /* hate red */
-  --gold: #ffcc33;
+:root{
+  --bg-dark:#05060c;
 
-  --panel: rgba(255,255,255,0.04);
-  --panel-border: rgba(255,255,255,0.08);
-  --shadow: 0 26px 70px rgba(0,0,0,0.55);
+  --card-radius:16px;
+  --text-main:#e9f4f1;
+  --text-muted:#a8c1bd;
+
+  /* HATE THEME */
+  --accent:#ff4d4d;   /* red accent */
+  --gold:#ffcc33;
+
+  --panel:rgba(255,255,255,0.04);
+  --panel-border:rgba(255,255,255,0.08);
+  --shadow:0 26px 70px rgba(0,0,0,0.55);
 }
 
-* { box-sizing: border-box; }
-body {
-  margin: 0;
+*{ box-sizing:border-box; }
+body{
+  margin:0;
   background:
-    radial-gradient(1200px 600px at 70% -200px, rgba(90,12,12,0.95) 0%, transparent 60%),
-    radial-gradient(900px 520px at 10% 0%, rgba(40,8,8,0.92) 0%, transparent 55%),
-    radial-gradient(900px 560px at 85% 30%, rgba(255,59,59,0.10) 0%, transparent 55%),
+    radial-gradient(1200px 600px at 70% -200px, rgba(80,12,18,0.92) 0%, transparent 60%),
+    radial-gradient(900px 520px at 10% 0%, rgba(25,10,18,0.92) 0%, transparent 55%),
+    radial-gradient(900px 560px at 85% 30%, rgba(255,77,77,0.10) 0%, transparent 55%),
     var(--bg-dark);
-  color: var(--text-main);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color:var(--text-main);
+  font-family:Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* subtle stars + grain */
@@ -39,13 +42,13 @@ body:before{
   background:
     radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,0.55) 50%, transparent 52%),
     radial-gradient(2px 2px at 68% 12%, rgba(255,255,255,0.38) 50%, transparent 52%),
-    radial-gradient(1.5px 1.5px at 44% 26%, rgba(255,255,255,0.36) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 44% 26%, rgba(255,255,255,0.38) 50%, transparent 52%),
     radial-gradient(1.6px 1.6px at 84% 36%, rgba(255,255,255,0.30) 50%, transparent 52%),
     radial-gradient(1.4px 1.4px at 18% 42%, rgba(255,255,255,0.30) 50%, transparent 52%),
     radial-gradient(2px 2px at 30% 70%, rgba(255,255,255,0.24) 50%, transparent 52%),
     radial-gradient(1.4px 1.4px at 76% 74%, rgba(255,255,255,0.24) 50%, transparent 52%),
     radial-gradient(1.6px 1.6px at 55% 88%, rgba(255,255,255,0.26) 50%, transparent 52%);
-  opacity:0.24;
+  opacity:0.26;
   mix-blend-mode:screen;
 }
 body:after{
@@ -53,165 +56,163 @@ body:after{
   position:fixed; inset:0;
   pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-  opacity:.15;
+  opacity:.16;
   mix-blend-mode:overlay;
 }
 
-.wrapper {
-  max-width: 1100px;
-  margin: 42px auto 60px;
-  padding: 0 22px;
+.wrapper{
+  max-width:1100px;
+  margin:42px auto 60px;
+  padding:0 22px;
 }
 
-h1 {
-  text-align: center;
-  font-size: 44px;
-  letter-spacing: 1px;
-  margin: 0 0 22px;
-  font-weight: 900;
+h1{
+  text-align:center;
+  font-size:44px;
+  letter-spacing:1px;
+  margin:0 0 22px;
+  font-weight:900;
 }
-h1 span { color: var(--accent); }
+h1 span{ color:var(--accent); }
 
-.grid {
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 24px;
-  padding: 18px;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow);
-  position: relative;
-  overflow: hidden;
+.grid{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:24px;
+  padding:18px;
+  backdrop-filter:blur(10px);
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
 }
 .grid:before{
   content:"";
   position:absolute; inset:-40px;
   background:
-    radial-gradient(520px 260px at 22% 18%, rgba(255,59,59,0.16), transparent 62%),
-    radial-gradient(520px 280px at 78% 85%, rgba(255,255,255,0.05), transparent 64%),
-    radial-gradient(520px 260px at 70% 15%, rgba(40,8,8,0.26), transparent 62%);
-  filter: blur(14px);
+    radial-gradient(520px 260px at 22% 18%, rgba(255,77,77,0.14), transparent 62%),
+    radial-gradient(520px 280px at 78% 85%, rgba(255,255,255,0.06), transparent 64%),
+    radial-gradient(520px 260px at 70% 15%, rgba(25,10,18,0.26), transparent 62%);
+  filter:blur(14px);
   opacity:0.85;
   pointer-events:none;
 }
 .grid-inner{ position:relative; z-index:1; }
 
-/* ROWS — gradient storytelling (hate heat) */
-.row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-  padding: 12px;
-  border-radius: 18px;
-  margin-bottom: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.30);
+/* ROWS — “heat” descending into darkness */
+.row{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:14px;
+  padding:12px;
+  border-radius:18px;
+  margin-bottom:14px;
+  border:1px solid rgba(255,255,255,0.08);
+  box-shadow:0 10px 26px rgba(0,0,0,0.30);
 }
 
-/* row 1 = “most hated” (hotter) */
+/* row-1 = hottest hate */
 .row-1{
-  background: linear-gradient(90deg, #ff3b3b 0%, #ff6a2a 55%, #ff8a3a 100%);
+  background:linear-gradient(90deg, #FF3B3B 0%, #E02A2A 45%, #B61F1F 100%);
   box-shadow:
     0 0 0 1px rgba(255,255,255,0.18) inset,
-    0 12px 30px rgba(255,59,59,0.10);
+    0 12px 30px rgba(255,77,77,0.10);
 }
-.row-2 { background: linear-gradient(90deg, #b51f1f, #7f1818); }
-.row-3 { background: linear-gradient(90deg, #671414, #3f0f0f); }
-.row-4 { background: linear-gradient(90deg, #2a0c0c, #170808); }
-.row-5 { background: linear-gradient(90deg, #0b0e14, #05080f); }
+.row-2{ background:linear-gradient(90deg, #D13A3A, #7C1D1D); }
+.row-3{ background:linear-gradient(90deg, #6A1B1B, #341015); }
+.row-4{ background:linear-gradient(90deg, #221019, #110A10); }
+.row-5{ background:linear-gradient(90deg, #0E0A10, #05080f); }
 
-@media (max-width: 900px){
-  .row{ grid-template-columns: repeat(3, 1fr); }
+@media (max-width:900px){
+  .row{ grid-template-columns:repeat(3, 1fr); }
 }
-@media (max-width: 560px){
-  h1{ font-size: 34px; }
-  .row{ grid-template-columns: repeat(2, 1fr); }
+@media (max-width:560px){
+  h1{ font-size:34px; }
+  .row{ grid-template-columns:repeat(2, 1fr); }
 }
 
 /* PLAYER CARD */
-.card {
-  background: rgba(0,0,0,0.35);
-  border-radius: var(--card-radius);
-  padding: 14px 12px 16px;
-  text-align: center;
-  position: relative;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
-  overflow: hidden;
+.card{
+  background:rgba(0,0,0,0.35);
+  border-radius:var(--card-radius);
+  padding:14px 12px 16px;
+  text-align:center;
+  position:relative;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.06);
+  overflow:hidden;
 }
 .card:before{
   content:"";
   position:absolute; inset:0;
   background:
-    radial-gradient(220px 140px at 30% 20%, rgba(255,255,255,0.10), transparent 60%),
-    radial-gradient(280px 220px at 70% 95%, rgba(0,0,0,0.58), transparent 60%);
+    radial-gradient(220px 140px at 30% 20%, rgba(255,255,255,0.12), transparent 60%),
+    radial-gradient(280px 220px at 70% 95%, rgba(0,0,0,0.55), transparent 60%);
   opacity:0.85;
   pointer-events:none;
 }
 
-/* highlight #1 (kept subtle) */
-.card.rank-1 {
+/* #1 highlighted (still gold, consistent with love map) */
+.card.rank-1{
   box-shadow:
-    0 0 0 2px rgba(255,204,51,0.82),
-    0 0 26px rgba(255,204,51,0.18),
+    0 0 0 2px rgba(255,204,51,0.85),
+    0 0 28px rgba(255,204,51,0.22),
     inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 
 /* RANK BADGE */
-.rank {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  background: rgba(0,0,0,0.58);
-  padding: 4px 8px;
-  border-radius: 10px;
-  font-size: 12px;
-  font-weight: 800;
-  border: 1px solid rgba(255,255,255,0.12);
+.rank{
+  position:absolute;
+  top:10px; right:10px;
+  z-index:2;
+  background:rgba(0,0,0,0.55);
+  padding:4px 8px;
+  border-radius:10px;
+  font-size:12px;
+  font-weight:800;
+  border:1px solid rgba(255,255,255,0.12);
 }
 
-/* HEADSHOT (same treatment as love map, hue-shifted) */
-.avatar {
-  width: 92px;
-  height: 92px;
-  margin: 0 auto 10px;
-  border-radius: 50%;
-  position: relative;
-  overflow: hidden;
-  z-index: 2;
-
+/* HEADSHOT */
+.avatar{
+  width:92px;
+  height:92px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  position:relative;
+  overflow:hidden;
+  z-index:2;
+  background:rgba(0,0,0,0.25);
   box-shadow:
     0 0 0 3px rgba(255,255,255,0.12),
     0 10px 18px rgba(0,0,0,0.35);
-  background: rgba(0,0,0,0.25);
 }
 .avatar img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width:100%;
+  height:100%;
+  object-fit:cover;
   display:block;
-  transform: scale(1.03);
+  transform:scale(1.03);
 }
 
-/* subtle hate “heat” glow (kept light) */
-.avatar::before{
+/* red “heat” glow (kept subtle) */
+.avatar:before{
   content:"";
   position:absolute;
   inset:-10px;
   border-radius:50%;
-  background: radial-gradient(circle at 50% 45%,
-    rgba(255,59,59,0.20) 0%,
-    rgba(255,59,59,0.10) 38%,
+  background:radial-gradient(circle at 50% 45%,
+    rgba(255,77,77,0.22) 0%,
+    rgba(255,77,77,0.10) 38%,
     transparent 70%);
-  filter: blur(6px);
-  opacity: 0.72;
+  filter:blur(6px);
+  opacity:0.75;
   pointer-events:none;
 }
-.avatar::after{
+.avatar:after{
   content:"";
   position:absolute;
   inset:0;
   border-radius:50%;
-  background: radial-gradient(circle at 50% 35%,
+  background:radial-gradient(circle at 50% 35%,
     rgba(255,255,255,0.06) 0%,
     rgba(0,0,0,0.22) 68%,
     rgba(0,0,0,0.38) 100%);
@@ -219,92 +220,91 @@ h1 span { color: var(--accent); }
 }
 
 /* TEXT */
-.name {
-  position: relative;
-  z-index: 2;
-  font-size: 14px;
-  font-weight: 800;
-  margin: 0 0 4px;
-  line-height: 1.15;
+.name{
+  position:relative;
+  z-index:2;
+  font-size:14px;
+  font-weight:800;
+  margin:0 0 4px;
+  line-height:1.15;
 }
-.team {
-  position: relative;
-  z-index: 2;
-  font-size: 11px;
-  letter-spacing: 0.9px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin: 0;
+.team{
+  position:relative;
+  z-index:2;
+  font-size:11px;
+  letter-spacing:0.9px;
+  text-transform:uppercase;
+  color:rgba(233,244,241,0.72);
+  margin:0;
 }
 
 /* FOOTER */
-.footer {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,0.15);
+.footer{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,0.15);
 }
 
-.scale {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: rgba(244,238,237,0.85);
+.scale{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  color:rgba(233,244,241,0.85);
 }
-.scale span:first-child{ color: rgba(255,59,59,0.95); }
-.scale span:last-child{ color: rgba(244,238,237,0.78); }
+.scale span:first-child{ color:rgba(255,77,77,0.95); }
+.scale span:last-child{ color:rgba(233,244,241,0.78); }
 
-.bar {
-  flex: 1;
-  height: 8px;
-  border-radius: 7px;
-  background: linear-gradient(90deg, #ff3b3b, #ff6a2a, #671414, #05080f);
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+.bar{
+  flex:1;
+  height:8px;
+  border-radius:7px;
+  background:linear-gradient(90deg, #FF3B3B, #D13A3A, #341015, #05080f);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.12);
 }
 
 .scale-sub{
   margin-top:6px;
   font-size:11px;
-  color:rgba(244,238,237,0.70);
+  color:rgba(233,244,241,0.70);
   letter-spacing:0.02em;
 }
 
-.meta {
-  font-size: 12px;
-  line-height: 1.45;
-  color: rgba(244,238,237,0.78);
-  margin-top: 10px;
-  max-width: 980px;
+.meta{
+  font-size:12px;
+  line-height:1.45;
+  color:rgba(233,244,241,0.78);
+  margin-top:10px;
+  max-width:980px;
 }
-.meta b{ color: rgba(244,238,237,0.92); }
+.meta b{ color:rgba(233,244,241,0.92); }
 
-.brand {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 16px;
-  margin-top: 12px;
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-top:12px;
 }
-
-.source {
-  font-size: 12px;
-  color: rgba(244,238,237,0.72);
+.source{
+  font-size:12px;
+  color:rgba(233,244,241,0.72);
 }
 .source a{
-  color: rgba(255,59,59,0.95);
-  text-decoration: none;
-  border-bottom: 1px dotted rgba(255,59,59,0.55);
-  font-weight: 900;
+  color:rgba(255,77,77,0.95);
+  text-decoration:none;
+  border-bottom:1px dotted rgba(255,77,77,0.55);
+  font-weight:900;
 }
 
 .brand img{
-  height: 60px;
-  width: auto;
-  filter: drop-shadow(0 14px 26px rgba(0,0,0,0.55));
-  opacity: 0.96;
+  height:60px;
+  width:auto;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,0.55));
+  opacity:0.96;
 }
 </style>
 </head>
@@ -345,42 +345,39 @@ h1 span { color: var(--accent); }
 <script>
 /**
  * Headshots: ESPN CDN
- * NFL:           https://a.espncdn.com/i/headshots/nfl/players/full/{athleteId}.png
- * College FB:    https://a.espncdn.com/i/headshots/college-football/players/full/{athleteId}.png
- *
- * This tries multiple ESPN endpoints automatically so you get maximum coverage.
+ * https://a.espncdn.com/i/headshots/nfl/players/full/{athleteId}.png
  */
 
 const PLAYERS = [
-  { rank:1,  team:"PHILADELPHIA EAGLES", name:"Jalen Hurts",          espnId:4040715 },
-  { rank:2,  team:"WASHINGTON",         name:"Jake Moody",           espnId:4372066 },
-  { rank:3,  team:"CHICAGO BEARS",      name:"Luther Burden",        espnId:4685278, sport:"college-football" },
-  { rank:4,  team:"MIAMI DOLPHINS",     name:"Cole Strange",         espnId:4051001 },
-  { rank:5,  team:"INDIANAPOLIS COLTS", name:"Daniel Jones",         espnId:3917792 },
+  { rank:1,  team:"PHILADELPHIA EAGLES",   name:"Jalen Hurts",          espnId:4040715 },
+  { rank:2,  team:"WASHINGTON COMMANDERS",name:"Jake Moody",           espnId:4372066 },
+  { rank:3,  team:"CHICAGO BEARS",        name:"Luther Burden",        espnId:4685278 },
+  { rank:4,  team:"MIAMI DOLPHINS",       name:"Cole Strange",         espnId:4051001 },
+  { rank:5,  team:"INDIANAPOLIS COLTS",   name:"Daniel Jones",         espnId:3917792 },
 
-  { rank:6,  team:"CHICAGO BEARS",      name:"Tyrique Stevenson",    espnId:4426374 },
-  { rank:7,  team:"CLEVELAND BROWNS",   name:"Deshaun Watson",        espnId:3122840 },
-  { rank:8,  team:"NEW YORK JETS",      name:"Justin Fields",        espnId:4362887 },
-  { rank:9,  team:"PITTSBURGH STEELERS",name:"T.J. Watt",            espnId:3044559 },
-  { rank:10, team:"TENNESSEE TITANS",   name:"Mike Brown",           espnId:null }, /* if no ESPN athleteId exists, fallback silhouette is used */
+  { rank:6,  team:"CHICAGO BEARS",        name:"Tyrique Stevenson",    espnId:4426374 },
+  { rank:7,  team:"CLEVELAND BROWNS",     name:"Deshaun Watson",       espnId:3122840 },
+  { rank:8,  team:"NEW YORK JETS",        name:"Justin Fields",        espnId:4362887 },
+  { rank:9,  team:"PITTSBURGH STEELERS",  name:"T.J. Watt",            espnId:3045282 },
+  { rank:10, team:"TENNESSEE TITANS",     name:"Mike Brown",           espnId:4244310 },
 
-  { rank:11, team:"PHILADELPHIA EAGLES",name:"A.J. Brown",           espnId:4047646 },
-  { rank:12, team:"INDIANAPOLIS COLTS", name:"Anthony Richardson",   espnId:4429084 },
-  { rank:13, team:"CINCINNATI BENGALS", name:"Shemar Stewart",       espnId:4685562, sport:"college-football" },
-  { rank:14, team:"PITTSBURGH STEELERS",name:"Aaron Rodgers",        espnId:8439 },
-  { rank:15, team:"MIAMI DOLPHINS",     name:"Zach Wilson",          espnId:4361259 },
+  { rank:11, team:"PHILADELPHIA EAGLES",  name:"A.J. Brown",           espnId:4047646 },
+  { rank:12, team:"INDIANAPOLIS COLTS",   name:"Anthony Richardson",   espnId:4429084 },
+  { rank:13, team:"CINCINNATI BENGALS",   name:"Shemar Stewart",       espnId:4685562 },
+  { rank:14, team:"PITTSBURGH STEELERS",  name:"Aaron Rodgers",        espnId:8439 },
+  { rank:15, team:"MIAMI DOLPHINS",       name:"Zach Wilson",          espnId:4361259 },
 
-  { rank:16, team:"CINCINNATI BENGALS", name:"Joe Burrow",           espnId:3915511 },
-  { rank:17, team:"BALTIMORE RAVENS",   name:"Cooper Rush",          espnId:3044312 },
-  { rank:18, team:"BUFFALO BILLS",      name:"Josh Allen",           espnId:3918298 },
-  { rank:19, team:"LA CHARGERS",        name:"Rashawn Slater",        espnId:4242283 },
-  { rank:20, team:"CLEVELAND BROWNS",   name:"Myles Garrett",         espnId:3128729 },
+  { rank:16, team:"CINCINNATI BENGALS",   name:"Joe Burrow",           espnId:3915511 },
+  { rank:17, team:"BALTIMORE RAVENS",     name:"Cooper Rush",          espnId:2972515 },
+  { rank:18, team:"BUFFALO BILLS",        name:"Josh Allen",           espnId:3918298 },
+  { rank:19, team:"LOS ANGELES CHARGERS", name:"Rashawn Slater",        espnId:4242283 },
+  { rank:20, team:"CLEVELAND BROWNS",     name:"Myles Garrett",         espnId:3122132 },
 
-  { rank:21, team:"CHICAGO BEARS",      name:"D.J. Moore",            espnId:3915416 },
-  { rank:22, team:"TENNESSEE TITANS",   name:"Cam Ward",              espnId:4688380 },
-  { rank:23, team:"KANSAS CITY CHIEFS", name:"Rashee Rice",           espnId:4429202 },
-  { rank:24, team:"DETROIT LIONS",      name:"Rock Ya-Sin",           espnId:3910229 },
-  { rank:25, team:"PHILADELPHIA EAGLES",name:"Jalen Carter",          espnId:4429725 }
+  { rank:21, team:"CHICAGO BEARS",        name:"D.J. Moore",            espnId:3915416 },
+  { rank:22, team:"TENNESSEE TITANS",     name:"Cam Ward",              espnId:4688380 },
+  { rank:23, team:"KANSAS CITY CHIEFS",   name:"Rashee Rice",           espnId:4428331 },
+  { rank:24, team:"DETROIT LIONS",        name:"Rock Ya-Sin",           espnId:3910229 },
+  { rank:25, team:"PHILADELPHIA EAGLES",  name:"Jalen Carter",          espnId:4685759 }
 ];
 
 const FALLBACK =
@@ -389,7 +386,7 @@ const FALLBACK =
     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
       <defs>
         <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-          <stop stop-color="rgba(255,255,255,0.20)" offset="0"/>
+          <stop stop-color="rgba(255,255,255,0.22)" offset="0"/>
           <stop stop-color="rgba(255,255,255,0.06)" offset="1"/>
         </linearGradient>
       </defs>
@@ -399,26 +396,11 @@ const FALLBACK =
     </svg>
 `);
 
-function espnHeadshot(path, id){
-  return `https://a.espncdn.com/i/headshots/${path}/players/full/${id}.png`;
+function headshotUrl(id){
+  return `https://a.espncdn.com/i/headshots/nfl/players/full/${id}.png`;
 }
-function espnCombiner(path, id){
-  return `https://a.espncdn.com/combiner/i?img=/i/headshots/${path}/players/full/${id}.png&w=240&h=240`;
-}
-
-function headshotCandidates(p){
-  if(!p.espnId) return [];
-  const primary = p.sport || "nfl";
-
-  // Try: chosen sport -> NFL -> college-football (covers edge cases)
-  const order = Array.from(new Set([primary, "nfl", "college-football"]));
-
-  const urls = [];
-  for(const sport of order){
-    urls.push(espnHeadshot(sport, p.espnId));
-    urls.push(espnCombiner(sport, p.espnId));
-  }
-  return urls;
+function headshotAltUrl(id){
+  return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${id}.png&w=240&h=240`;
 }
 
 function rowClassForRank(rank){
@@ -433,6 +415,7 @@ function render(){
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
 
+  // 5 rows of 5
   for(let r = 0; r < 5; r++){
     const row = document.createElement("div");
     row.className = `row ${rowClassForRank(r*5 + 1)}`;
@@ -451,21 +434,11 @@ function render(){
 
       const img = document.createElement("img");
       img.alt = `${p.name} headshot`;
-
-      const candidates = headshotCandidates(p);
-      let idx = 0;
-
-      if(candidates.length){
-        img.src = candidates[idx];
-        img.onerror = () => {
-          idx++;
-          if(idx < candidates.length) img.src = candidates[idx];
-          else img.src = FALLBACK;
-        };
-      } else {
-        img.src = FALLBACK;
-      }
-
+      img.src = headshotUrl(p.espnId);
+      img.onerror = () => {
+        if (img.src !== headshotAltUrl(p.espnId)) img.src = headshotAltUrl(p.espnId);
+        else img.src = FALLBACK;
+      };
       avatar.appendChild(img);
 
       const name = document.createElement("div");
