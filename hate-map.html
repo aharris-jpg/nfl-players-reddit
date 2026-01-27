@@ -150,7 +150,7 @@ h1 span{ color:var(--accent); }
   pointer-events:none;
 }
 
-/* #1 highlighted (still gold, consistent with love map) */
+/* #1 highlighted */
 .card.rank-1{
   box-shadow:
     0 0 0 2px rgba(255,204,51,0.85),
@@ -335,7 +335,6 @@ h1 span{ color:var(--accent); }
             &nbsp;·&nbsp; Data: Reddit comments &nbsp;·&nbsp; Headshots: ESPN CDN
           </div>
 
-          <!-- Original Vegas Insider logo (keep this) -->
           <img src="https://i.postimg.cc/Dfckk5rD/download.png" alt="Vegas Insider" />
         </div>
       </div>
@@ -349,35 +348,38 @@ h1 span{ color:var(--accent); }
  */
 
 const PLAYERS = [
-  { rank:1,  team:"PHILADELPHIA EAGLES",   name:"Jalen Hurts",          espnId:4040715 },
-  { rank:2,  team:"WASHINGTON COMMANDERS",name:"Jake Moody",           espnId:4372066 },
-  { rank:3,  team:"CHICAGO BEARS",        name:"Luther Burden",        espnId:4685278 },
-  { rank:4,  team:"MIAMI DOLPHINS",       name:"Cole Strange",         espnId:4051001 },
-  { rank:5,  team:"INDIANAPOLIS COLTS",   name:"Daniel Jones",         espnId:3917792 },
+  { rank:1,  team:"PHILADELPHIA EAGLES",     name:"Jalen Hurts",         espnId:4040715 },
+  { rank:2,  team:"WASHINGTON COMMANDERS",  name:"Jake Moody",          espnId:4372066 },
+  { rank:3,  team:"CHICAGO BEARS",          name:"Luther Burden",       espnId:4685278 },
+  { rank:4,  team:"MIAMI DOLPHINS",         name:"Cole Strange",        espnId:4051001 },
+  { rank:5,  team:"INDIANAPOLIS COLTS",     name:"Daniel Jones",        espnId:3917792 },
 
-  { rank:6,  team:"CHICAGO BEARS",        name:"Tyrique Stevenson",    espnId:4426374 },
-  { rank:7,  team:"CLEVELAND BROWNS",     name:"Deshaun Watson",       espnId:3122840 },
-  { rank:8,  team:"NEW YORK JETS",        name:"Justin Fields",        espnId:4362887 },
-  { rank:9,  team:"PITTSBURGH STEELERS",  name:"T.J. Watt",            espnId:3045282 },
-  { rank:10, team:"TENNESSEE TITANS",     name:"Mike Brown",           espnId:4244310 },
+  { rank:6,  team:"CHICAGO BEARS",          name:"Tyrique Stevenson",   espnId:4426374 },
+  { rank:7,  team:"CLEVELAND BROWNS",       name:"Deshaun Watson",      espnId:3122840 },
+  { rank:8,  team:"NEW YORK JETS",          name:"Justin Fields",       espnId:4362887 },
+  { rank:9,  team:"TENNESSEE TITANS",       name:"Mike Brown",          espnId:4244310 },
+  { rank:10, team:"INDIANAPOLIS COLTS",     name:"Anthony Richardson",  espnId:4429084 },
 
-  { rank:11, team:"PHILADELPHIA EAGLES",  name:"A.J. Brown",           espnId:4047646 },
-  { rank:12, team:"INDIANAPOLIS COLTS",   name:"Anthony Richardson",   espnId:4429084 },
-  { rank:13, team:"CINCINNATI BENGALS",   name:"Shemar Stewart",       espnId:4685562 },
-  { rank:14, team:"PITTSBURGH STEELERS",  name:"Aaron Rodgers",        espnId:8439 },
-  { rank:15, team:"MIAMI DOLPHINS",       name:"Zach Wilson",          espnId:4361259 },
+  { rank:11, team:"CINCINNATI BENGALS",     name:"Shemar Stewart",      espnId:4685562 },
+  { rank:12, team:"PITTSBURGH STEELERS",    name:"Aaron Rodgers",       espnId:8439 },
+  { rank:13, team:"MIAMI DOLPHINS",         name:"Zach Wilson",         espnId:4361259 },
+  { rank:14, team:"DETROIT LIONS",          name:"Rock Ya-Sin",          espnId:3910229 },
+  { rank:15, team:"CINCINNATI BENGALS",     name:"Joe Burrow",          espnId:3915511 },
 
-  { rank:16, team:"CINCINNATI BENGALS",   name:"Joe Burrow",           espnId:3915511 },
-  { rank:17, team:"BALTIMORE RAVENS",     name:"Cooper Rush",          espnId:2972515 },
-  { rank:18, team:"BUFFALO BILLS",        name:"Josh Allen",           espnId:3918298 },
-  { rank:19, team:"LOS ANGELES CHARGERS", name:"Rashawn Slater",        espnId:4242283 },
-  { rank:20, team:"CLEVELAND BROWNS",     name:"Myles Garrett",         espnId:3122132 },
+  { rank:16, team:"BALTIMORE RAVENS",       name:"Cooper Rush",         espnId:2972515 },
+  { rank:17, team:"BUFFALO BILLS",          name:"Josh Allen",          espnId:3918298 },
+  { rank:18, team:"LOS ANGELES CHARGERS",   name:"Rashawn Slater",      espnId:4242283 },
+  { rank:19, team:"CLEVELAND BROWNS",       name:"Myles Garrett",       espnId:3122132 },
+  { rank:20, team:"TENNESSEE TITANS",       name:"Cam Ward",            espnId:4688380 },
 
-  { rank:21, team:"CHICAGO BEARS",        name:"D.J. Moore",            espnId:3915416 },
-  { rank:22, team:"TENNESSEE TITANS",     name:"Cam Ward",              espnId:4688380 },
-  { rank:23, team:"KANSAS CITY CHIEFS",   name:"Rashee Rice",           espnId:4428331 },
-  { rank:24, team:"DETROIT LIONS",        name:"Rock Ya-Sin",           espnId:3910229 },
-  { rank:25, team:"PHILADELPHIA EAGLES",  name:"Jalen Carter",          espnId:4685759 }
+  { rank:21, team:"KANSAS CITY CHIEFS",     name:"Rashee Rice",         espnId:4428331 },
+  { rank:22, team:"PHILADELPHIA EAGLES",    name:"Jalen Carter",        espnId:4685759 },
+
+  /* ✅ FIXED ESPN IDs so headshots load */
+  { rank:23, team:"CHICAGO BEARS",          name:"Caleb Williams",      espnId:4431611 },
+  { rank:24, team:"CINCINNATI BENGALS",     name:"Jordan Battle",       espnId:4567098 },
+
+  { rank:25, team:"SAN FRANCISCO 49ERS",    name:"Mac Jones",           espnId:4241464 }
 ];
 
 const FALLBACK =
@@ -403,7 +405,6 @@ function headshotAltUrl(id){
   return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${id}.png&w=240&h=240`;
 }
 
-/* ✅ CHANGE: show CITY/MARKET (matches Love map) */
 function marketFromTeam(team){
   const t = String(team || "").toUpperCase().replace(/\s+/g," ").trim();
   const MAP = {
@@ -421,7 +422,8 @@ function marketFromTeam(team){
     "BUFFALO BILLS":"BUFFALO",
     "LOS ANGELES CHARGERS":"LA CHARGERS",
     "DETROIT LIONS":"DETROIT",
-    "KANSAS CITY CHIEFS":"KC CHIEFS"
+    "KANSAS CITY CHIEFS":"KC CHIEFS",
+    "SAN FRANCISCO 49ERS":"SF 49ERS"
   };
   return MAP[t] || t;
 }
