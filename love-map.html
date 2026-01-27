@@ -350,35 +350,35 @@ h1 span { color: var(--accent); }
  */
 
 const PLAYERS = [
-  { rank:1,  team:"MINNESOTA",      name:"JJ McCarthy",      espnId:4433970 },
-  { rank:2,  team:"BUFFALO",        name:"Josh Allen",       espnId:3918298 },
-  { rank:3,  team:"MIAMI",          name:"Kenneth Grant",    espnId:4894654 },
-  { rank:4,  team:"TENNESSEE",      name:"Cam Ward",         espnId:4688380 },
-  { rank:5,  team:"DENVER",         name:"Bo Nix",           espnId:4426338 },
+  { rank:1,  team:"BUFFALO BILLS",          name:"Josh Allen",         espnId:3918298 },
+  { rank:2,  team:"MIAMI DOLPHINS",         name:"Kenneth Grant",      espnId:4894654 },
+  { rank:3,  team:"TENNESSEE TITANS",       name:"Cam Ward",           espnId:4688380 },
+  { rank:4,  team:"DENVER BRONCOS",         name:"Bo Nix",             espnId:4426338 },
+  { rank:5,  team:"PHILADELPHIA EAGLES",    name:"Ty Robinson",        espnId:4569586 },
 
-  { rank:6,  team:"PHILADELPHIA",   name:"Ty Robinson",      espnId:4569586 },
-  { rank:7,  team:"COMMANDERS",     name:"Jayden Daniels",   espnId:4426348 },
-  { rank:8,  team:"INDIANAPOLIS",   name:"Daniel Jones",     espnId:3917792 },
-  { rank:9,  team:"NY GIANTS",      name:"Russell Wilson",   espnId:14881 },
-  { rank:10, team:"NY JETS",        name:"Justin Fields",    espnId:4362887 },
+  { rank:6,  team:"WASHINGTON COMMANDERS",  name:"Jayden Daniels",     espnId:4426348 },
+  { rank:7,  team:"INDIANAPOLIS COLTS",     name:"Daniel Jones",       espnId:3917792 },
+  { rank:8,  team:"NEW YORK GIANTS",        name:"Russell Wilson",     espnId:14881 },
+  { rank:9,  team:"NEW YORK JETS",          name:"Justin Fields",      espnId:4362887 },
+  { rank:10, team:"PITTSBURGH STEELERS",    name:"Aaron Rodgers",      espnId:8439 },
 
-  { rank:11, team:"PITTSBURGH",     name:"Aaron Rodgers",    espnId:8439 },
-  { rank:12, team:"SEATTLE",        name:"Sam Darnold",      espnId:3912547 },
-  { rank:13, team:"TB BUCS",        name:"Baker Mayfield",   espnId:3052587 },
-  { rank:14, team:"JACKSONVILLE",   name:"Trevor Lawrence",  espnId:4361579 },
-  { rank:15, team:"JACKSONVILLE",   name:"Travis Hunter",    espnId:4685415 },
+  { rank:11, team:"SEATTLE SEAHAWKS",       name:"Sam Darnold",        espnId:3912547 },
+  { rank:12, team:"TAMPA BAY BUCCANEERS",   name:"Baker Mayfield",     espnId:3052587 },
+  { rank:13, team:"JACKSONVILLE JAGUARS",   name:"Trevor Lawrence",    espnId:4361579 },
+  { rank:14, team:"JACKSONVILLE JAGUARS",   name:"Travis Hunter",      espnId:4685415 },
+  { rank:15, team:"MINNESOTA VIKINGS",      name:"Justin Jefferson",   espnId:4262921 },
 
-  { rank:16, team:"MINNESOTA",      name:"Justin Jefferson", espnId:4262921 },
-  { rank:17, team:"CHICAGO",        name:"Caleb Williams",   espnId:4431611 },
-  { rank:18, team:"CAROLINA",       name:"Bryce Young",      espnId:4685720 },
-  { rank:19, team:"PITTSBURGH",     name:"Will Howard",      espnId:4429955 },
-  { rank:20, team:"BALTIMORE",      name:"Derrick Henry",    espnId:3043078 },
+  { rank:16, team:"CHICAGO BEARS",          name:"Caleb Williams",     espnId:4431611 },
+  { rank:17, team:"CAROLINA PANTHERS",      name:"Bryce Young",        espnId:4685720 },
+  { rank:18, team:"PITTSBURGH STEELERS",    name:"Will Howard",        espnId:4429955 },
+  { rank:19, team:"BALTIMORE RAVENS",       name:"Derrick Henry",      espnId:3043078 },
+  { rank:20, team:"BALTIMORE RAVENS",       name:"Lamar Jackson",      espnId:3916387 },
 
-  { rank:21, team:"HOUSTON",        name:"CJ Stroud",        espnId:4432577 },
-  { rank:22, team:"BALTIMORE",      name:"Lamar Jackson",    espnId:3916387 },
-  { rank:23, team:"CINCINNATI",     name:"Joe Burrow",       espnId:3915511 },
-  { rank:24, team:"KC CHIEFS",      name:"Patrick Mahomes",  espnId:3139477 },
-  { rank:25, team:"BUFFALO",        name:"Ty Johnson",       espnId:3915411 } // ✅ fixed
+  { rank:21, team:"CINCINNATI BENGALS",     name:"Joe Burrow",         espnId:3915511 },
+  { rank:22, team:"KANSAS CITY CHIEFS",     name:"Patrick Mahomes",    espnId:3139477 },
+  { rank:23, team:"BUFFALO BILLS",          name:"Ty Johnson",         espnId:3915411 },
+  { rank:24, team:"ARIZONA CARDINALS",      name:"Will Johnson",       espnId:4685408 },
+  { rank:25, team:"CLEVELAND BROWNS",       name:"Mason Graham",       espnId:4873232 }
 ];
 
 const FALLBACK =
@@ -402,6 +402,35 @@ function headshotUrl(id){
 }
 function headshotAltUrl(id){
   return `https://a.espncdn.com/combiner/i?img=/i/headshots/nfl/players/full/${id}.png&w=240&h=240`;
+}
+
+/* show CITY/MARKET */
+function marketFromTeam(team){
+  const t = String(team || "").toUpperCase().replace(/\s+/g," ").trim();
+  const MAP = {
+    "ARIZONA CARDINALS":"ARIZONA",
+    "BALTIMORE RAVENS":"BALTIMORE",
+    "BUFFALO BILLS":"BUFFALO",
+    "CAROLINA PANTHERS":"CAROLINA",
+    "CHICAGO BEARS":"CHICAGO",
+    "CINCINNATI BENGALS":"CINCINNATI",
+    "CLEVELAND BROWNS":"CLEVELAND",
+    "DENVER BRONCOS":"DENVER",
+    "INDIANAPOLIS COLTS":"INDIANAPOLIS",
+    "JACKSONVILLE JAGUARS":"JACKSONVILLE",
+    "KANSAS CITY CHIEFS":"KC CHIEFS",
+    "MIAMI DOLPHINS":"MIAMI",
+    "MINNESOTA VIKINGS":"MINNESOTA",
+    "NEW YORK GIANTS":"NY GIANTS",
+    "NEW YORK JETS":"NY JETS",
+    "PHILADELPHIA EAGLES":"PHILADELPHIA",
+    "PITTSBURGH STEELERS":"PITTSBURGH",
+    "SEATTLE SEAHAWKS":"SEATTLE",
+    "TAMPA BAY BUCCANEERS":"TB BUCS",
+    "TENNESSEE TITANS":"TENNESSEE",
+    "WASHINGTON COMMANDERS":"WASHINGTON"
+  };
+  return MAP[t] || t;
 }
 
 function rowClassForRank(rank){
@@ -447,7 +476,7 @@ function render(){
 
       const team = document.createElement("div");
       team.className = "team";
-      team.textContent = p.team;
+      team.textContent = marketFromTeam(p.team);
 
       card.appendChild(badge);
       card.appendChild(avatar);
